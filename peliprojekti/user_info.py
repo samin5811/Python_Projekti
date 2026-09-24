@@ -1,3 +1,12 @@
+import random
+from paketti import Player
+from paketti import Room
+from paketti import Item
+
+inventory = []
+pillow = Item("Pillow", random.randint(1,10))
+bedroom = Room("Bedroom", pillow)
+player = Player("", inventory, pillow)
 username = input("What is your name? ")
 user_age = input("What is your age? ")
 
@@ -6,7 +15,6 @@ action2 = "inventory"
 action3 = "drop item"
 action4 = "quit"
 
-inventory = []
 
 def action_1():
     taken_item = input("What item do you want to take?: ")
