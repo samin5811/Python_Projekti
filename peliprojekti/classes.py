@@ -1,9 +1,15 @@
+# Kaikki luokat tänne.
+
 class Player:
     def __init__(self, name:str, inventory:list, health=100, damage=1):
         self.name = name
         self.inventory = inventory
         self.health = health
         self.damage = damage
+
+class Item:
+    def __init__(self, name:str):
+        self.name = name
 
 class Room:
     rooms = []
@@ -56,19 +62,16 @@ class Outside(Room):
         print(self.text_list["Attack"][self.attack_index])
         if self.attack_index < self.text_list["Attack"].__len__()-1:
             self.attack_index += 1
+    def talk(self):
+        if self.attack_index == 0:
+            print(self.text_list["Talk"][self.talk_index])
+            if self.talk_index < self.text_list["Talk"].__len__()-1:
+                self.talk_index += 1
+        else:
+            print("I don't think it wants to talk anymore.")
 class Forest(Outside):
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
 class Castle(Outside):
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
-class Ending(Room):
-    def __init__(self, name, items, action_list, text_list):
-        super().__init__(name, items, action_list, text_list)
-    def restart(self):
-        Room.current_location = 0
-        next_room = Room.rooms[Room.current_location]
-        return next_room
-class Item:
-    def __init__(self, name:str):
-        self.name = name
