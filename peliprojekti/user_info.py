@@ -10,6 +10,6 @@ def ask_user_info():
             break
         except ValueError:
             print("Error: given value is not an integer. Try again.")
-    username = input("What is your name? ")
+    username = str(input("What is your name? "))
     return username, user_age
     

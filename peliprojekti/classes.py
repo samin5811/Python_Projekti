@@ -28,7 +28,9 @@ class Room:
     def take_item(self, item_name:str, inventory:list):
         for i in self.items:
             if i.name.lower() == item_name.lower():
-                inventory.append(i)   
+                if i.name not in inventory:
+                    inventory.append(i.name)
+                    return i.name   
                 self.items.remove(i)
     def talk(self):
         print(self.text_list["Talk"][self.talk_index])
@@ -55,23 +57,28 @@ class LivingRoom(Room):
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
 class Outside(Room):
+    attack_index = 0
+    talk_index = 0
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
-        self.attack_index = 0
     def attack(self):
-        print(self.text_list["Attack"][self.attack_index])
-        if self.attack_index < self.text_list["Attack"].__len__()-1:
-            self.attack_index += 1
+        print(self.text_list["Attack"][self.__class__.attack_index])
+        if self.__class__.attack_index < self.text_list["Attack"].__len__()-1:
+            self.__class__.attack_index += 1
     def talk(self):
-        if self.attack_index == 0:
-            print(self.text_list["Talk"][self.talk_index])
-            if self.talk_index < self.text_list["Talk"].__len__()-1:
-                self.talk_index += 1
+        if self.__class__.attack_index == 0:
+            print(self.text_list["Talk"][self.__class__.talk_index])
+            if self.__class__.talk_index < self.text_list["Talk"].__len__()-1:
+                self.__class__.talk_index += 1
         else:
             print("I don't think it wants to talk anymore.")
 class Forest(Outside):
+    attack_index = 0
+    talk_index = 0
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
 class Castle(Outside):
+    attack_index = 0
+    talk_index = 0
     def __init__(self, name, items, action_list, text_list):
         super().__init__(name, items, action_list, text_list)
