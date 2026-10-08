@@ -5,7 +5,7 @@ basic_actions = {"Take item": "Take item", "Talk": "Talk", "Move": "Move"}
 Default_texts = {"Talk":["You talk with the voices in your head."], "Move":["Vaihda tämä teksti"]}
 
 # Kaikki huoneet ja niiden luomis funktio
-def create_room(room_number:int, player_inventory:list, ending=""):
+def create_room(room_number:int, player_inventory:list, ending:list=[]):
     current_room = ""
     goblin = "Goblin"
     orc = "Orc"
@@ -107,93 +107,93 @@ def create_room(room_number:int, player_inventory:list, ending=""):
             if player_inventory.__len__() > 6:
                 castle_texts["Move"] = ["You slowly make your way to the castle and when i say slowly i mean reallllly slowwwwwly like slower than a snail and when i say slower than a snail it's not a exaggeration,\nduring your walk you actually see a snail passing you and making its way to the castle faster than you. After what feels like years or maybe even decades you arrive at the castle gates. Too weak to even push the doors open you crawl through the doggy door on the gate and when you look up you see the dragon staring at you and for some reason it looks bigger and older than it did when you left your house."]
                 castle_texts["Attack"] = ["You are on the ground on all fours how the hell can you attack from there? Anyway the dragon spits a fireball on you."]
-                ending = "Overencumbered"
+                ending.append("Overencumbered")
                 castle_texts["Talk"] = ["You open your mouth and before you can get even a single syllable out of your mouth the dragon spits a fireball on you"]
-                ending = "Overencumbered"
+                ending.append("Overencumbered")
             elif Forest.attack_index == 0 and Forest.talk_index > 1:
                 player_inventory.append(orc)
                 if goblin in player_inventory:
                     castle_texts["Move"] = ["Three humanoids walked into a castle, one after another: a goblin, an orc, and you. The goblin tries to order the dragon to stop stealing pizza go back home.\nThe orc does the same but with just his eyes never opening his mouth. Then it's your turn what will you do?"]
                     castle_texts["Attack"] = ["Clearly seeing that the dragon can't be talked down you take matters into your own hands. With your knife you slash the dragon from behind while it is distracted by the goblin and orc. The dragon turns around trying to counterattack but turning around only means the goblin and orc can attack from behind it again. It's a hard fight even though it's three against one but eventually you three manage to beat the dragon."]
-                    ending = "Unexpected alliance"
+                    ending.append("Unexpected alliance")
                     castle_texts["Talk"] = ["With the goblins silver tongue, the orcs civilization felling stare and your unlimited charisma the three of you manage to convince the dragon to return all the pizzas,\nnever to repeat this incident again."]
-                    ending = "Pacifist"
+                    ending.append("Pacifist")
                 else:
                     castle_texts["Move"] = ["You and the orc reach the castle gates and together you push the doors open. On the other side is the dragon eating a pile of pizza. You and the orc look at each other and nod.\nBoth of you get ready to face the dragon."]
                     castle_texts["Attack"] = ["Both of you charge at the dragon, with your knife and axe dealing the first blow before the dragons has time to react. The dragon attacks with its fire breath, sharp claws,\nbig bites and tail whips, but with the unbreakble bond you and the orc have, none of the dragons attacks stop your assault. With perfect teamwork, impeccably timed support and assists you manage to defeat the dragon."]
-                    ending = "BFF"
+                    ending.append("BFF")
                     castle_texts["Talk"] = ["You try to talk to the dragon and the orc is helping by staring at the dragon really hard. You explain that it needs to stop stealing pizzas or it will become hunted by angry villagers.\nYou almost get through to the dragon but it's not enough, feels like you are missing something or somebody. The dragon is done listening and unleashes its fire breath on you almost scorching you, but the orc pushes you away to save you. Seeing your ally burn to ashes in front of you makes something snap in your head and endless rage and bloodlust starts pouring out. With knife in hand you rush to attacks the dragon but you don't even see it because all you're seeing is red."]
-                    ending = "Revengeance"
+                    ending.append("Revengeance")
             elif goblin in player_inventory:
                     castle_texts["Move"] = ["You and the goblin arrive at the castle gates. You ask the goblin what's the plan. The goblin explains that you distract the dragon while the goblin deals with it.\nYou don't really understand but the goblin must have a way to deal with it right? You go in the castle and see the dragon in front of you next to a pile of pizza"]
                     castle_texts["Attack"] = ["You get ready to attack and reach for your knife but then you realize your knife is missing. Before you have a chance to figure out what happaned,\nyou look down and see a knife going through your chest. You fall down on the ground and feel somebody emptying your pockets. With your vision and consciousness fading the last thing you hear is the maniacal laughter of your backstabber."]
-                    ending = "Backstabbed"
+                    ending.append("Backstabbed")
                     castle_texts["Talk"] = ["You try talking to the dragon. The goblin told you exactly what to say to calm down the dragon so this should be easy. As you continue talking, the dragon keeps getting angrier with every word you say\nbut you don't notice it and just keep going."]
-                    ending = "Maybe you should not trust the first goblin you see?"
+                    ending.append("Maybe you should not trust the first goblin you see?")
             else:
                 castle_texts["Talk"] = ["You talk with your knife about tomorrows breakfast", "Your knife says it want pineapple pizza for breakfast and you consider throwing it far away from you."]
                 if Outside.attack_index > 0 and Forest.attack_index > 1:
                     castle_texts["Move"] = ["You slice and dice your way through the castle gates and cut the doors to tiny pieces. You see the dragon in front of you and between you and the dragon is a pile of pizza."]
                     castle_texts["Attack"] = ["The dragon is right in front of you and you get ready to fight, but soon you realize the dragon is not moving. You wait a bit and the dragon falls apart into small bite size pieces,\nthen you realize you accidentally sliced the dragon when cutting the doors. Looks like you are a true master of slicing and dicing."]
-                    ending = "Slicing and dicing"
+                    ending.append("Slicing and dicing")
                 else:
                     castle_texts["Move"] = ["You go to the castle gates and wonder how you are going to get in."]
                     castle_texts["Attack"] = ["You try to cut the castle gates open but your knife technique is not good enough. While trying to open the gates, the dragon blows the doors down on top of you and you get stuck under the them.\nWith no way to lift the heavy doors, you are stuck alone, hungry and in pain. You die of starvation."]
-                    ending = "Sad"
+                    ending.append("Sad")
         elif "Book" in player_inventory:
             if Forest.attack_index == 0 and Forest.talk_index > 1:
                 player_inventory.append(orc)
                 if goblin in player_inventory:
                     castle_texts["Move"] = ["Three humanoids walked into a castle, one after another: a goblin, an orc, and you. The goblin tries to order the dragon to stop stealing pizzas and go back home.\nThe orc does the same but with just his eyes never opening his mouth. Then it's your turn what will you do?"]
                     castle_texts["Attack"] = ["Before the dragon has a chance to do anything you attack it with your fists. The dragon is now angry and is going to attack you but the orc grabs the dragons tail.\nThe goblin jumps on the dragons head and blinds it. With the three of you attacking from all sides it looks like you are winning, until the dragons unleashes all its power and spits fire everywhere burning you and the pile of pizza on the ground. It's a hard fight but eventually you manage to bring down the dragon."]
-                    ending = "Lone survivor"
+                    ending.append("Lone survivor")
                     castle_texts["Talk"] = ["With the goblins silver tongue, the orcs civilization felling stare and your immeasurable charisma, the three of you manage to convince\nthe dragon to return all the pizzas and never to repeat this incident again."]
-                    ending = "Pacifist"
+                    ending.append("Pacifist")
                 else:
                     castle_texts["Move"] = ["You and the orc reach the castle gates and together you push the doors open. On the other side is the dragon eating a pile of pizza. You and the orc look at each other and nod.\nBoth of you get ready to face the dragon."]
                     castle_texts["Attack"] = ["Both of you charge at the dragon with your fists, dealing the first blow before the dragons has time to react. The fight is going well, with both you and the orc working in perfect tandem,\nbut without weapons the fight eventually turns around. Everybody is battered and exhausted, the battle will be decided in the next 5 second. You go in for the final blow but the dragon somehow manages to dodge and counterattack. The orc jumps in front of the attack and takes it in your stead, allowing you to defeat the dragon with your last attack, as you fall down on the ground having used up all your strength."]
-                    ending = "The Cost of winning"
+                    ending.append("The Cost of winning")
                     castle_texts["Talk"] = ["You try to talk to the dragon and the orc is helping by staring the dragon really hard. You explain that it need to stop stealing pizzas or it will become hunted by angry villagers.\nYou almost get through to the dragon but it's not enough it feels like you are missing something or somebody. The dragon is done listening and unleashes its fire breath on you almost scorching you but the orc pushes you away to save you. Seeing the orc burn to ashes in front of you makes something makes you get up and run for your life."]
-                    ending = "Coward"
+                    ending.append("Coward")
             elif goblin in player_inventory:
                     castle_texts["Move"] = ["You and the goblin arrive at the castle gates. You ask the goblin what's the plan. The goblin explains that you distract the dragon while the goblin deals with it.\nYou don't really understand but the goblin must have a way to deal with it right? You go in the castle and see the dragon in front of you next to a pile of pizza"]
                     castle_texts["Attack"] = ["You raise your fists and get ready to attack. The goblin told you all of the dragons attack patterns and habits so this should be an easy fight. You get beaten down extremely badly.\nYou fly against the castle wall and you fall face down on the ground an inch away from dying. With the last of you strength you lift your face and see the reason you are now on the brink of leaving this world. The goblin standing in front of you with a wide grin on its face is the last thing you see when your soul leaves your body. "]
-                    ending = "Betrayed"
+                    ending.append("Betrayed")
                     castle_texts["Talk"] = ["You try talking to the dragon. The goblin told you exactly what to say to calm down the dragon so this should be easy. As you continue talking\nthe dragon keeps getting angrier with every word you say but you don't notice it and just keep going."]
-                    ending = "Maybe you should not trust the first goblin you see?"
+                    ending.append("Maybe you should not trust the first goblin you see?")
             else:
                 castle_texts["Talk"] = ["Your head is empty", "Unga goes #bunga"]
                 castle_texts["Move"] = ["You go to the castle through the gates and see the dragon in front of you. Between you and the dragon is a pile of pizza. You raise your fists and\nprepare to fight the dragon."]
                 if Outside.attack_index > 0 and Forest.attack_index > 1:
                     castle_texts["Attack"] = ["You charge the dragon and punch it with the force of a centillion pineapple pizzas. With your fist trained in many battles and your technique perfected since this morning.\nYour punch blows away the dragons scales like plucking feathers from a chicken leaving its skin smooth as a baby's bottom. Your punch was so powerful that not even a speck of the dragon is left."]
-                    ending = "Strong"
+                    ending.append("Strong")
                 else:
                     castle_texts["Attack"] = ["You charge the dragon and punch it. You have no battle experience and zero technique so to nobodys surprise the dragon doesn't even flinch.\nWhy did you think you could defeat a dragon with your fists? The dragon stomps on you and only a you sized hole is left in the ground where you once were."]
-                    ending = "Weak"
+                    ending.append("Weak")
         elif "Knife" in player_inventory:
             castle_texts["Talk"] = ["No time to talk."]
             if Outside.attack_index > 0 and Forest.attack_index > 1:
                 castle_texts["Move"] = ["You slice and dice your way through the castle gates and cut the doors to small bite size pieces. You see the dragon in front of you and between you and the dragon is a pile of pizza."]
                 castle_texts["Attack"] = ["The dragon is right in front of you and you get ready to fight but soon you realize the dragon is not moving. You wait a bit and the dragon falls apart into small bite size pieces\nthen you realize you accidentally sliced the dragon when cutting the doors. Looks like you are a true master of slicing and dicing."]
-                ending = "Slicing and dicing"
+                ending.append("Slicing and dicing")
             else:
                 castle_texts["Move"] = ["You go to the castle gates and wonder how you are going to get in."]
                 castle_texts["Attack"] = ["You try to cut the castle gates open but your knife technique is not good enough. While trying to open the gates the dragon blows the doors down on top of you and you get stuck under the them.\nWith no way to lift the heavy doors you are stuck alone, hungry and in pain. You die of starvation."]
-                ending = "Sad"
+                ending.append("Sad")
         else:
             castle_texts["Talk"] = ["No time to talk."]
             if player_inventory.__len__() == 1:
                 castle_texts["Move"] = ["You run to the castle and burst in through the gates blowing the doors to smithereens. The dragon is right in front of you probably wondering why you have no clothes on.\nBetween you and the dragon is a pile of pizza."]
                 castle_texts["Attack"] = ["With no clothes to weigh you down, you run faster than you have ever ran. You are running towards the dragon as it starts to breathe fire but you are so fast it feels like time is slowing down.\nYou dodge the fire and use your ultimate technique to pierce through the dragons scales with your hand and cut its tail off. Wicked! The dragon flees without its tail between its legs.\nYou kick the dragon tail. No respect for dragons."]
-                ending = "Speedrun"
+                ending.append("Speedrun")
             else:
                 castle_texts["Move"] = ["You go to the castle through the gates and see the dragon in front of you. Between you and the dragon is a pile of pizza. You raise your fists and\nprepare to fight the dragon."]
                 if Outside.attack_index > 0 and Forest.attack_index > 1:
                     castle_texts["Attack"] = ["You charge the dragon and punch it with the force of a centillion pineapple pizzas. With your fist trained in many battles and your technique perfected since this morning,\nyour punch blows away the dragons scales, like plucking feathers from a chicken, leaving its skin smooth as a baby's bottom. Your punch was so powerful that not even a speck of the dragon is left."]
-                    ending = "Strong"
+                    ending.append("Strong")
                 else:
                     castle_texts["Attack"] = ["You charge the dragon and punch it. You have no battle experience to speak of and negative technique, so to nobodys surprise the dragon doesn't even flinch.\nWhy did you think you could defeat a dragon with your fists? The dragon stomps on you and only a you sized hole is left in the ground where you once were."]
-                    ending = "Weak"
+                    ending.append("Weak")
         castle = Castle("Castle", [], castle_actions, castle_texts)
         current_room = castle
     return current_room, ending

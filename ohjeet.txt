@@ -1,2 +1,3 @@
 Valitse toiminto kirjoittamalla se terminaaliin.
 Pelin kulku määräytyy sen perusteella mitä esineitä otat mukaan.
+Esineet jota voi ottaa on merkitty tekstissä hakasulkeilla näin [esine].

@@ -14,7 +14,7 @@ ending = ""
 endings_found = []
 
 # Pelaajan kaikki toiminnot koko pelin aikana. Ottaa parametrinä aloitus huoneen ja muokkaa sitä pelin aikana.
-def user_actions(current_room:Room, ending=""):
+def user_actions(current_room:Room, ending=[]):
     while True:
         save_game()
         print("")
@@ -36,10 +36,10 @@ def user_actions(current_room:Room, ending=""):
                 print(f"\nYou picked up {taken_item}")
         elif input_choice.lower() == current_room.action_list["Talk"].lower(): # Talk Action
             current_room.talk()
-            if ending != "" and current_room.text_list["Talk"].__len__() == 1:
-                return ending
+            if ending and current_room.text_list["Talk"].__len__() == 1:
+                return ending[1]
         elif input_choice.lower() == current_room.action_list["Move"].lower(): # Move Action
-            if ending != "":
+            if ending:
                 print(f"Thank you {player.name}! But our dragon is not in another castle!")
             elif input("You can't come back if you move to the next area. Do you still want to go? (yes/no): ") == "yes".lower():
                 print("")
@@ -52,8 +52,8 @@ def user_actions(current_room:Room, ending=""):
             current_room.cook()
         elif "Attack" in current_room.action_list and input_choice.lower() == current_room.action_list["Attack"].lower(): # Attack Action
             current_room.attack()
-            if ending != "":
-                return ending
+            if ending != []:
+                return ending[0]
         elif "Restart" in current_room.action_list and input_choice.lower() == current_room.action_list["Restart"].lower(): # Restart Action
                 current_room = current_room.restart()
                 print(current_room.text_list["Move"][0])
@@ -73,6 +73,7 @@ def save_game():
 
 # Lue save file
 try:
+    # Tämä jos peli jäi kesken
     with open("save.json", "r") as tiedosto:
         data_luettu = json.load(tiedosto)
         player.name = data_luettu['player']
@@ -91,12 +92,16 @@ try:
             ending = current_room_and_ending[1]
             print("")
             print(current_room.text_list["Move"][0])
+        else:
+            print("")
+            print(current_room.text_list["Move"][0])
 except json.decoder.JSONDecodeError:
-    # Jos save file on tyhjä
+    # Tämä jos save.json on tyhjä
     player.name = ask_user_info()[0]
     print("")
     print(current_room.text_list["Move"][0])
 except KeyError:
+    # Tämä jos pelin pääsi läpi
     with open("save.json", "r") as tiedosto:
         data_luettu = json.load(tiedosto)
         player.name = data_luettu['player']

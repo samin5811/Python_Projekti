@@ -31,7 +31,7 @@ def endings(ending, endings_found):
     elif ending == "Backstabbed":
         print("Wow i did not see that coming, did you?. Well better luck next time i guess.")
     elif ending == "BFF":
-        print("Both of you become the saviors of the village. You continue to support each other every you go and accomplish many great feats.\nThere will be many trials in your future, but you know that together, you can do anything.")
+        print("Both of you become the saviors of the village. You continue to support each other wherever you go and accomplish many great feats.\nThere will be many trials in your future, but you know that together, you can do anything.")
     elif ending == "Betrayed":
         print("Maybe don't take fighting advice from a goblin next time?")
     if ending not in endings_found:
