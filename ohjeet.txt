@@ -1,0 +1,2 @@
+Valitse toiminto kirjoittamalla se terminaaliin.
+Pelin kulku määräytyy sen perusteella mitä esineitä otat mukaan.

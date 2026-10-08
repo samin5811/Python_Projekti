@@ -36,7 +36,7 @@ def user_actions(current_room:Room, ending=""):
                 print(f"\nYou picked up {taken_item}")
         elif input_choice.lower() == current_room.action_list["Talk"].lower(): # Talk Action
             current_room.talk()
-            if "Book" in player.inventory and ending != "":
+            if ending != "" and current_room.text_list["Talk"].__len__() == 1:
                 return ending
         elif input_choice.lower() == current_room.action_list["Move"].lower(): # Move Action
             if ending != "":

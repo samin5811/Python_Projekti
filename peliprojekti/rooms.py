@@ -7,6 +7,8 @@ Default_texts = {"Talk":["You talk with the voices in your head."], "Move":["Vai
 # Kaikki huoneet ja niiden luomis funktio
 def create_room(room_number:int, player_inventory:list, ending=""):
     current_room = ""
+    goblin = "Goblin"
+    orc = "Orc"
     if room_number == 1:
         # Room 1
         pillow = Item("Pillow")
@@ -63,7 +65,6 @@ def create_room(room_number:int, player_inventory:list, ending=""):
     if room_number == 5:
         # Room 5
         helmet = Item("Helmet")
-        goblin = "Goblin"
         forest_actions = basic_actions.copy()
         forest_actions["Attack"] = "Attack"
         forest_texts = copy.deepcopy(Default_texts)
@@ -72,11 +73,11 @@ def create_room(room_number:int, player_inventory:list, ending=""):
                 player_inventory.append(goblin)
                 forest_texts["Move"] = ["You continue your journey with the goblin into the forest and hear strange noises. You see a shadowy figure in the distance. When you get closer you realize it's an orc.\nYou ready your knife just in case. You also notice a [helmet] on the ground."]
                 forest_texts["Talk"] = ["You and the goblin try to ask the orc to help you with the dragon but the orc doesn't say anything and just pick up his weapon.", "You tell the orc to drop his weapon but he doesn't.", "You ask the orc if he wants to join you but still no response."]
-                forest_texts["Attack"] = ["You charge at the orc with your knife but the orc blocks your attack and kicks you down. The orc attacks while you're down but the goblin attacks the orc and together you manage to defeat it.", "You kick the unconscious orc. No respect for orcs."]
+                forest_texts["Attack"] = ["You charge at the orc with your knife but the orc blocks your attack and kicks you down.", " The orc attacks while you're down but the goblin attacks the orc and together you manage to defeat it.", "You kick the unconscious orc. No respect for orcs."]
             else:
                 forest_texts["Move"] = ["You continue your journey into the forest and hear strange noises. You see a shadowy figure in the distance. When you get closer you realize it's an orc. You ready your knife just in case.\nYou also noitce a [helmet] on the ground."]
                 forest_texts["Talk"] = ["You greet the orc and wait to see his reaction. The orc picks up his weapon and stares at you.", "You tell the orc about your mission to stop the dragon and he silenty just listens to you.", "You ask if the orc wants to join you on your journey and he just nods his head."]
-                forest_texts["Attack"] = ["You charge at the orc with your knife and the orc blocks your attack but you cut through his weapon and armor. Disarmed and wounded the orc can't fight back and you defeat the orc.", "You kick the unconscious orc. No respect for orcs."]
+                forest_texts["Attack"] = ["You charge at the orc with your knife and the orc blocks your attack but you cut through his weapon and armor.", " Disarmed and wounded the orc can't fight back and you defeat the orc.", "You kick the unconscious orc. No respect for orcs."]
         elif "Book" in player_inventory:
             if Outside.attack_index == 0 and Outside.talk_index > 0:
                 player_inventory.append(goblin)
@@ -90,7 +91,7 @@ def create_room(room_number:int, player_inventory:list, ending=""):
         elif "Knife" in player_inventory:
             forest_texts["Move"] = ["You continue your journey into the forest and hear strange noises. You see a shadowy figure in the distance. When you get closer you realize it's an orc. You ready your knife just in case.\nou also noitce a [helmet] on the ground."]
             forest_texts["Talk"] = ["The orc says something but you don't understand it."]
-            forest_texts["Attack"] = ["You charge at the orc with your knife and the orc blocks your attack but you cut through his weapon and armor. Disarmed and wounded the orc can't fight back and you defeat the orc.", "You kick the unconscious orc. No respect for orcs."]
+            forest_texts["Attack"] = ["You charge at the orc with your knife and the orc blocks your attack but you cut through his weapon and armor.", "Disarmed and wounded the orc can't fight back and you defeat the orc.", "You kick the unconscious orc. No respect for orcs."]
         else:
             forest_texts["Move"] = ["You continue your journey into the forest and hear strange noises. You see a shadowy figure in the distance. When you get closer you realize it's an orc. You also notice a [helmet] on the ground."]
             forest_texts["Talk"] = ["The orc says something but you don't understand it."]
@@ -99,7 +100,6 @@ def create_room(room_number:int, player_inventory:list, ending=""):
         current_room = forest
     if room_number == 6:
         # Room 6
-        orc = Item("Orc")
         castle_actions = basic_actions.copy()
         castle_actions["Attack"] = "Attack"
         castle_texts = copy.deepcopy(Default_texts)
@@ -131,7 +131,7 @@ def create_room(room_number:int, player_inventory:list, ending=""):
                     castle_texts["Talk"] = ["You try talking to the dragon. The goblin told you exactly what to say to calm down the dragon so this should be easy. As you continue talking, the dragon keeps getting angrier with every word you say\nbut you don't notice it and just keep going."]
                     ending = "Maybe you should not trust the first goblin you see?"
             else:
-                castle_texts["Talk"] = ["You talk with your knife about tomorrows breakfast"]
+                castle_texts["Talk"] = ["You talk with your knife about tomorrows breakfast", "Your knife says it want pineapple pizza for breakfast and you consider throwing it far away from you."]
                 if Outside.attack_index > 0 and Forest.attack_index > 1:
                     castle_texts["Move"] = ["You slice and dice your way through the castle gates and cut the doors to tiny pieces. You see the dragon in front of you and between you and the dragon is a pile of pizza."]
                     castle_texts["Attack"] = ["The dragon is right in front of you and you get ready to fight, but soon you realize the dragon is not moving. You wait a bit and the dragon falls apart into small bite size pieces,\nthen you realize you accidentally sliced the dragon when cutting the doors. Looks like you are a true master of slicing and dicing."]
@@ -162,7 +162,7 @@ def create_room(room_number:int, player_inventory:list, ending=""):
                     castle_texts["Talk"] = ["You try talking to the dragon. The goblin told you exactly what to say to calm down the dragon so this should be easy. As you continue talking\nthe dragon keeps getting angrier with every word you say but you don't notice it and just keep going."]
                     ending = "Maybe you should not trust the first goblin you see?"
             else:
-                castle_texts["Talk"] = ["Your head is empty"]
+                castle_texts["Talk"] = ["Your head is empty", "Unga goes #bunga"]
                 castle_texts["Move"] = ["You go to the castle through the gates and see the dragon in front of you. Between you and the dragon is a pile of pizza. You raise your fists and\nprepare to fight the dragon."]
                 if Outside.attack_index > 0 and Forest.attack_index > 1:
                     castle_texts["Attack"] = ["You charge the dragon and punch it with the force of a centillion pineapple pizzas. With your fist trained in many battles and your technique perfected since this morning.\nYour punch blows away the dragons scales like plucking feathers from a chicken leaving its skin smooth as a baby's bottom. Your punch was so powerful that not even a speck of the dragon is left."]
