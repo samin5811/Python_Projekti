@@ -1,5 +1,5 @@
 import json
-# importtaa funktion joka kysyy pelaajan nimen ja iän. Myös kaikki huoneet, loppu tekstit ja luokat huoneiden kautta
+# importtaa funktion joka kysyy pelaajan nimen ja iän. Myös kaikki huoneet ja loppu tekstit. Luokat tulee huoneiden mukana
 from user_info import *
 from rooms import *
 from ending_texts import *
